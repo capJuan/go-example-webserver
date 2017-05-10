@@ -4,4 +4,4 @@ services:
   server:
     image: juandocker/go-example-webserver
     ports: 
-      - "8080:8080"
+      - "5432:8080"
