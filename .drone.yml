@@ -20,3 +20,10 @@ pipeline:
     commands:
       - docker login -u juandocker -p $PASS
       - docker push juandocker/go-example-webserver
+  deploy:
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker pull juandocker/go-example-webserver
+      - docker stack deploy -c ./docker-compose.yml example-webserver
