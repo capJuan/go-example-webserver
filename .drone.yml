@@ -10,4 +10,4 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - docker run capjuan/example-webserver /test.sh
+      - docker run capjuan/go-example-webserver /test.sh
