@@ -19,4 +19,4 @@ pipeline:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - docker login -u juandocker -p $PASS
-      - docker push juandocker/go-example-webserver
+      - docker push capjuan/go-example-webserver
