@@ -7,3 +7,5 @@ RUN chmod +x /test.sh
 
 CMD /server
 EXPOSE 8080
+
+LABEL "app.name"="ACME go"
