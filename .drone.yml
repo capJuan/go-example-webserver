@@ -4,13 +4,13 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - docker build -t juandocker/go-example-webserver .
+      - docker build -t juandocker/go-example-webserver:$DRONE_COMMIT_SHA .
   test:
     image: docker
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - docker run juandocker/go-example-webserver /test.sh
+      - docker run juandocker/go-example-webserver:$DRONE_COMMIT_SHA /test.sh
   push:
     image: docker
     environment:
@@ -19,11 +19,12 @@ pipeline:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - docker login -u juandocker -p $PASS
-      - docker push juandocker/go-example-webserver
+      - docker push juandocker/go-example-webserver:$DRONE_COMMIT_SHA
   deploy:
     image: docker
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - docker pull juandocker/go-example-webserver
+      - docker pull juandocker/go-example-webserver:$DRONE_COMMIT_SHA
+      - docker tag juandocker/go-example-webserver:$DRONE_COMMIT_SHA juandocker/go-example-webserver:production
       - docker stack deploy -c ./docker-compose.yml example-webserver

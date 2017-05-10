@@ -2,6 +2,6 @@ version: '3'
 
 services:
   server:
-    image: juandocker/go-example-webserver
+    image: juandocker/go-example-webserver:production
     ports: 
       - "5432:8080"
